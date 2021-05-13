@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block profile_base %}
+  <div style="height: 300px;">
+    <div>
+      <img style="width: 100%" src="{% static 'images/paul_bassett.jpg' %}" alt="paul_bassett_img"></img>
+    </div>
+    <div>
+      <p style="font-size: 14px">개발자가 좋아하는<br>알고리듬은<br>Algorithm<br>ㅎㅎ</p>
+    </div>
+  </div>
+  <div style="font-size: 10px">
+    <i style="color: #068cb9" class="fa fa-caret-right"></i><b>&nbsp;HISTORY</b>
+    <span style="float: right; font-size: 14px; color: #999999"><i class="fa fa-caret-up"></i>&nbsp;<i class="fa fa-caret-down"></i></span>
+  </div>
+  <hr>
+  <b class="color-blue">Eric</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
+  <div style="margin-top: 15px;"><select style="width: 100%"><option>파도타기</option></select></div>
+{% endblock %}
+{% block content %}
+    <div style="display: flex; font-size: 14px;">
+      <div class="col" style="display: flex; flex-direction: column;">
+      <span class="content-title">최근 게시물</span>
+      <hr style="margin-block-end: 0px; width: 100%;">
+      <div class="flex-middle" style="color: #999; background: rgb(248, 248, 248)">순간이 담긴 사진을<br>친구들과 함께 나눠보세요</div>
+      </div>
+      <div class="col" style="padding-bottom: 5px">
+      <span class="content-title" style="color: #fff;">더미</span>
+      <hr class="dashed">
+      <div class="row">
+        <div class="col">
+        &nbsp;다이어리&nbsp;&nbsp;<span class="board-count">0/0</span>
+        </div>
+        <div class="col">
+        &nbsp;사진첩&nbsp;&nbsp;<span class="board-count">0/0</span>
+        </div>
+      </div>
+      <hr class="dashed">
+      <div class="row">
+        <div class="col">
+        &nbsp;게시판&nbsp;&nbsp;<span class="board-count">0/0</span>
+        </div>
+        <div class="col">
+          {% comment %} <iframe id="music" src="https://www.youtube.com/embed/cXT3JJQM5Kw" allow="autoplay" frameborder="0" style="display:scroll;position:fixed;bottom:425px;right:10px;z-index:99999999" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> {% endcomment %}
+        </div>
+      </div>
+      <hr class="dashed">
+      <div class="row">
+        <div class="col">
+        &nbsp;방명록&nbsp;&nbsp;<span class="board-count">0/0</span>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div style="margin-top: 20px;">
+      <span class="content-title">미니룸 <span style="color: #ccc">| 스토리룸</span></span>
+      <img style="width: 100%; height: 300px; object-fit: cover;" src="{% static 'images/miniroom.jpg' %}"></img>
+{% endblock %}
+
+{% block category %}
+  <div class="menu-item menu-selected" onclick="handleClickMenu(this)">홈</div>
+  <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item" style="top: 86px" onclick="handleClickMenu(this)">다이어리</div>
+{% endblock %}
