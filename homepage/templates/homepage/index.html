@@ -59,7 +59,11 @@
 {% endblock %}
 
 {% block category %}
-  <div class="menu-item menu-selected" onclick="handleClickMenu(this)">홈</div>
-  <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">프로필</div>
-  <div class="menu-item" style="top: 86px" onclick="handleClickMenu(this)">다이어리</div>
+  <embed class="music-player menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
+  <div class="menu-item menu-selected" style="top: 48px" onclick="handleClickMenu(this)">홈</div>
+  <div class="menu-item" style="top: 86px" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item" style="top: 124px"  onclick="handleClickMenu(this)">다이어리</div>
+  {% comment %} <embed src="https://player.bgmstore.net/SveU3" autostart="true" allowscriptaccess="always" enablehtmlaccess="true" allowfullscreen="true" width="422" height="240"></embed> {% endcomment %}
+  {% comment %} <iframe src="https://player.bgmstore.net/SveU3" width="422" height="240" frameborder="0"></iframe> {% endcomment %}
+  {% comment %} <embed class="music-player menu-item" style="top: 124px" src="https://player.bgmstore.net/SveU3" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed> {% endcomment %}
 {% endblock %}

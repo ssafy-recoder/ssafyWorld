@@ -103,3 +103,19 @@ hr.dashed {
   border: 1px solid #2491b2;
   border-left: none;
 }
+.music-player {
+  position: absolute;
+  top: 10px;
+  height: 35px;
+  line-height: 35px;
+  right: -60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 0px 8px 8px 0px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
