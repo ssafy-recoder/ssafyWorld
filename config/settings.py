@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'accounts',
     'homepage',
+    'friends',
     'albums',
     'guest',
     'django.contrib.admin',
