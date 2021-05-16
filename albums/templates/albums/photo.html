@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+{% block profile_base %}
+<!--카테고리 넣기-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p>사진첩</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="{% url 'albums:index' %}">All</a>
+      </li>
+      {% comment %} for 이용해서 카테고리 보여주기 {% endcomment %}
+      {% for category in categories  %}
+      <li class="list-group-item">
+        <a href="{% url 'albums:index' %}?category={{ category.name }}">
+          {{ category.name }}
+        </a>
+      </li> 
+      {% endfor %}
+
+      <a href="{% url 'albums:create' %}">사진 등록</a>
+      <a href="">사진첩 관리</a>
+
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+<!--사진 보여주기-->
+<div class="justify-content-center">
+
+  <p>{{ photo.title }}</p>
+  <img style="max-width: 100%; max-height: 100%;" src="{{ photo.image.url }}">
+  <p>{{ photo.content }}</p>
+
+</div>
+
+
+ <form action="{% url 'albums:comments_create' photo.pk %}" method="POST">
+  {% csrf_token %}
+  {{ comment_form }}
+  <input type="submit">
+ </form>
+
+<br>
+<h4>댓글 목록</h4>
+{% for comment in comments %}
+<li>{{ comment.content }}</li>
+<form action="" method="POST">
+  {% csrf_token %}
+  <button type='submit'>DELETE</button>
+  </form>
+  {% endfor %}
+                <br>
+
+<a href="" class="btn btn-success">EDIT</a>
+<form action="" method="POST">
+  {% csrf_token %}
+  <button>DELETE</button>
+</form>
+
+
+{% endblock %}
+
+
+
+{% block category %}
+
+  <div class="menu-item" onclick="handleClickMenu(this)">홈</div>
+  <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item menu-selected" style="top: 86px" onclick="handleClickMenu(this)">사진첩</div>
+  <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">추천일촌</div>
+  <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>
+
+{% endblock %}
