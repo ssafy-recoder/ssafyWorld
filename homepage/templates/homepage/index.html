@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block style %}
+.homepage-content-box {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  background: #fff;
+  height: calc(100% - 30px);
+  overflow: scroll;
+  overflow-x:hidden;
+}
+
+{% endblock %}
+
 {% block profile_base %}
   <div style="height: 300px; width:150px;">
     <div>
@@ -23,7 +36,8 @@
   <div style="margin-top: 15px;"><select style="width: 100%"><option>파도타기</option></select></div>
 {% endblock %}
 {% block content %}
-    <div style="display: flex; font-size: 14px;">
+  <div class="homepage-content-box" sytle="overflow:scroll;">
+    <div style="display: flex; font-size: 14px;" >
       <div class="col" style="display: flex; flex-direction: column;">
       <span class="content-title">최근 게시물</span>
       <hr style="margin-block-end: 0px; width: 100%;">
@@ -43,9 +57,6 @@
         <div class="col">
         &nbsp;방명록&nbsp;&nbsp;<span class="board-count">0/0</span>
         </div>
-        <div class="col">
-          {% comment %} <iframe id="music" src="https://www.youtube.com/embed/cXT3JJQM5Kw" allow="autoplay" frameborder="0" style="display:scroll;position:fixed;bottom:425px;right:10px;z-index:99999999" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> {% endcomment %}
-        </div>
       </div>
       
       </div>
@@ -53,10 +64,11 @@
     <div style="margin-top: 20px;">
       <span class="content-title">미니룸 <span style="color: #ccc">| 스토리룸</span></span>
       <img style="width: 100%; height: 280px;" src="{% static 'images/miniroom.jpg' %}"></img>
+  </div>
 {% endblock %}
 
 {% block category %}
-  <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
+  <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&mute=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
   <a href="{% url 'homepage:index' this_user.pk %}">
     <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">홈</div>
   </a>
