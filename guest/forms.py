@@ -9,6 +9,9 @@ class guestForm(forms.ModelForm):
             attrs={
                 'class': 'form-control',
                 'placeholder': '내용 입력하세요',
+                'cols': '45',
+                'rows': '6',
+                'style': 'border-radius: 10px;'
             }
         )
     )
