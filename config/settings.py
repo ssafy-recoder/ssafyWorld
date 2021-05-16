@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'ssafy-world-ssu2.herokuapp.com',
     '127.0.0.1',
+    'localhost',
 ]
 
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'accounts',
     'homepage',
     'albums',
+    'guest',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -134,24 +136,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'config' / 'static'
 ]
+# 생성되는 img의 url을 생성해준다. localhost:8000/media/~~~형식
+MEDIA_URL = '/media/'
+# 실제로 생성될 파일의 경로!
+MEDIA_ROOT = BASE_DIR/'media'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-
-MEDIA_URL = '/images/'
-
-
-MEDIA_ROOT = BASE_DIR / 'config'/ 'static'/'images'
-STATIC_ROOT = BASE_DIR / 'config'/'staticfiles' 
-# STATIC_ROOT 추가
-
-
-
-
-
-
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
