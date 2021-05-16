@@ -15,15 +15,15 @@
 
   <div class="text-center mt-3">
     <div>
-      <img style="width: 30%" src="{% static 'images/싸피로고.png' %}" alt="싸피로고">
+      <img style="width: 25%" src="{% static 'images/싸피로고.png' %}" alt="싸피로고">
     </div>
       {% if user.is_authenticated %}
         <button type="button" class="btn btn-lg btn-white">
-          <i class="fas fa-user">
+          <i class="fas fa-user" style="color: blue;">
           </i>
         </button>
 
-        <h1>{{ user.username }}님 환영합니다</h1>
+        <h3>{{ user.username }}님 환영합니다</h3>
 
         <div>
         {% if user.profile_img %}
@@ -33,8 +33,11 @@
         {% endif %}
         </div>
 
+        <a href="{% url 'homepage:index' user.pk %}">
+          <button class="btn btn-warning mt-3">내 미니홈피</button>
+        </a>
         <a href="{% url 'accounts:logout' %}">
-          <button class="btn btn-info mt-3">로그아웃하기</button>
+          <button class="btn btn-info mt-3">로그아웃</button>
         </a>
 
       {% else %}

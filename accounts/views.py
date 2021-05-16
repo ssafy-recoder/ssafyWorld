@@ -18,7 +18,7 @@ def signup(request):
             # form.save()를 하면 현재 가입된 유저가 반환된다...?!
             user = form.save()
             auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('homepage:index')
+            return redirect('homepage:index', user.pk)
     else:
         form = CustomUserCreationForm()
     context = {
