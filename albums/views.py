@@ -11,7 +11,7 @@ def index(request):
         photos = Photo.objects.all()
 
     else:
-        photos = Photo.objects.filter(cateogory__name=category)
+        photos = Photo.objects.filter(category__name=category)
 
     categories = Category.objects.all()
 
@@ -35,7 +35,7 @@ def create(request):
 
         elif data['category_new'] != '':
             category, created = Category.objects.get_or_create(
-                group=data['category_new'])
+                name=data['category_new'])
 
         else:
             category = None
@@ -56,15 +56,25 @@ def create(request):
 
 
 def photo(request, pk):
+    categories = Category.objects.all()
     photo = Photo.objects.get(pk=pk)
     comment_form = CommentForm()
     comments = photo.comment_set.all()
     context = {
+        'categories':categories,
         'photo':photo,
         'comment_form':comment_form,
         'comments':comments,
     }
     return render(request, 'albums/photo.html', context)
+
+
+def delete(request, pk):
+    if request.method == 'POST':
+        photo = get_object_or_404(Photo, pk=pk)
+        photo.delete()
+        return redirect('albums:index')
+
 
 
 def comments_create(request, pk):

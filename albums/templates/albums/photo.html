@@ -3,7 +3,6 @@
 
 {% block profile_base %}
 <!--카테고리 넣기-->
-
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -16,13 +15,13 @@
       {% comment %} for 이용해서 카테고리 보여주기 {% endcomment %}
       {% for category in categories  %}
       <li class="list-group-item">
-        <a href="{% url 'albums:index' %}?category={{ category.group }}">
-          {{ category.group }}
+        <a href="{% url 'albums:index' %}?category={{ category.name }}">
+          {{ category.name }}
         </a>
       </li> 
       {% endfor %}
 
-      <a href="">사진 등록</a>
+      <a href="{% url 'albums:create' %}">사진 등록</a>
       <a href="">사진첩 관리</a>
 
     </ul>
