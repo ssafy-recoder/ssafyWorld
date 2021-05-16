@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+{% block profile_base %}
+<!--카테고리 넣기-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p>사진첩</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="{% url 'albums:index' %}">All</a>
+      </li>
+      {% comment %} for 이용해서 카테고리 보여주기 {% endcomment %}
+      {% for category in categories  %}
+      <li class="list-group-item">
+        <a href="{% url 'albums:index' %}?category={{ category.name }}">
+          {{ category.name }}
+        </a>
+      </li> 
+      {% endfor %}
+
+      <a href="{% url 'albums:create' %}">사진 등록</a>
+      <a href="">사진첩 관리</a>
+
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+<!--사진 보여주기-->
+
+
+
+  {% for photo in photos %}
+      <div class="col-md-4">
+        <div class="card my-2">
+          <img src="{{ photo.image.url }}" alt="사진">
+
+          <div class="card-body">
+            <small>앨범 : {{ photo.category.name }} </small>
+          </div>
+          <a href="{% url 'albums:photo' photo.pk %}" class="m-1">보러가기</a>
+        </div>
+      </div>
+    
+  {% empty %}
+    <h3>추억을 등록해주세요</h3>
+    <a href="{% url 'albums:create' %}">사진 등록하기</a>
+
+  {% endfor %}
+
+  </div>
+</div>
+{% endblock %}
+
+
+
+{% block category %}
+
+  <div class="menu-item" onclick="handleClickMenu(this)">홈</div>
+  <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item menu-selected" style="top: 86px" onclick="handleClickMenu(this)">사진첩</div>
+  <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">추천일촌</div>
+  <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>
+
+{% endblock %}
