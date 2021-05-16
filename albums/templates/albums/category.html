@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block profile_base %}
+<!--카테고리 넣기-->
+ <form method='POST' action="">
+  {% csrf_token %}
+
+
+  <div class="form-group m-3">
+    
+    <label>사진첩 목록</label>
+
+      <select name="category" class="form-control">
+        <option value='none'>Album List</option>
+
+          {% for category in categories %}
+            <option value='{{ category.id }}'>{{ category.name }}</option>
+          {% endfor %}
+      </select>
+
+  </div>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger m-3 ">삭제</button>  
+  </form>
+                              
+
+  <div class="form-group m-3">
+    <label>앨범 추가하기</label>
+    <input name="category_new" type="text" placeholder="Create a new category" class="form-control">
+    <button type='submit' class="btn btn-primary m-3">등록</button>
+  </div>
+
+</form>
+{% endblock %}
+
+
+
+{% block content %}
+<!--사진 보여주기-->
+
+
+
+  {% for photo in photos %}
+      <div class="col-md-4">
+        <div class="card my-2">
+          <img src="{{ photo.image.url }}" alt="사진">
+
+          <div class="card-body">
+            <small>앨범 : {{ photo.category.name }} </small>
+          </div>
+          <a href="{% url 'albums:photo' photo.pk %}" class="m-1">보러가기</a>
+        </div>
+      </div>
+    
+  {% empty %}
+    <h3>추억을 등록해주세요</h3>
+    <a href="{% url 'albums:create' %}">사진 등록하기</a>
+
+  {% endfor %}
+
+  </div>
+</div>
+{% endblock %}
+
+
+
+{% block category %}
+
+  <div class="menu-item" onclick="handleClickMenu(this)">홈</div>
+  <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item menu-selected" style="top: 86px" onclick="handleClickMenu(this)">사진첩</div>
+  <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">추천일촌</div>
+  <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>
+
+{% endblock %}
