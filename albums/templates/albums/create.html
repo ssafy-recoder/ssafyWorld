@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+
+{% block profile_base %}
+<!--카테고리 넣기-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p>사진첩</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="{% url 'albums:index' %}">All</a>
+      </li>
+      {% comment %} for 이용해서 카테고리 보여주기 {% endcomment %}
+      {% for category in categories  %}
+      <li class="list-group-item">
+        <a href="{% url 'albums:index' %}?category={{ category.name }}">
+          {{ category.name }}
+        </a>
+      </li> 
+      {% endfor %}
+
+      <a href="">사진 등록</a>
+      <a href="">사진첩 관리</a>
+
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+<!--사진 등록하기-->
+
+  <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+
+                <a href="{% url 'albums:index' %}" class="btn btn-dark my-3">BACK</a>
+
+                
+                <div class="card">
+
+
+                    <form method='POST' action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                     
+                        <div class="form-group m-3">
+                            <label>앨범 선택</label>
+                            <select name="category" class="form-control">
+                                <option value='none'>앨범을 선택해주세요</option>
+
+                                {% for category in categories %}
+                                <option value='{{category.id}}'>{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        <div class="form-group m-3">
+                            <label>앨범 추가하기</label>
+                            <input name="category_new" type="text" placeholder="Create a new category"
+                                class="form-control">
+                        </div>
+
+                          <div class="form-group m-3">
+                           <label>제목</label>
+                           <input required name="title" type="text" placeholder="제목을 입력해주세요"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group m-3">
+                           <label>내용</label>
+                           <input required name="content" type="text" placeholder="내용을 입력해주세요"
+                                class="form-control">
+                        </div>
+   
+
+                        <div class="form-group m-3">
+                            <label>사진 첨부</label>
+                            <input required name="images" type="file" multiple class="form-control-file">
+                        </div>
+
+                        <button type='submit' class="btn btn-primary m-3">등록</button>
+
+                    </form>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block category %}
+
+  <div class="menu-item" onclick="handleClickMenu(this)">홈</div>
+  <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item menu-selected" style="top: 86px" onclick="handleClickMenu(this)">사진첩</div>
+  <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">추천일촌</div>
+  <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>
+
+{% endblock %}
