@@ -33,7 +33,6 @@ def login(request):
         if form.is_valid():
             user = form.get_user()
             auth_login(request, form.get_user(), backend='django.contrib.auth.backends.ModelBackend')
-            print(user)
             return redirect('homepage:index', user.pk)
     else:
         form = AuthenticationForm()
@@ -66,5 +65,5 @@ def follow(request, user_pk):
                 # 팔로우 신청
                 you.followers.add(me)
                 me.followers.add(you)
-        return redirect('accounts:profile', you.username)
+        return redirect('friends:index', me.username)
     return redirect('accounts:login')

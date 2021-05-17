@@ -143,8 +143,12 @@
     <div class="menu-item" onclick="handleClickMenu(this)" style="font-family: 'Poor Story', cursive;">홈</div>
   </a>
   <div class="menu-item my-font" style="top: 48px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">프로필</div>
+  <a href="{% url 'albums:index' %}">
   <div class="menu-item" style="top: 86px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">사진첩</div>
-  <div class="menu-item" style="top: 124px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">추천일촌</div>
+  </a>
+  <a href="{% url 'friends:index' this_user.username %}">
+    <div class="menu-item" style="top: 124px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">추천일촌</div>
+  </a>
   <a href="{% url 'guest:index' person.pk %}">
     <div class="menu-item menu-selected" style="top: 162px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">방명록</div>
   </a>

@@ -6,8 +6,12 @@ from .models import Location
 # Create your views here.
 def index(request, username):
     person = get_object_or_404(get_user_model(), username=username)
+    all_users = User.objects.all()
+
     context = {
         'person': person,
+        'this_user': person,
+        'all_users':all_users,
     }
     
     return render(request, 'friends/index.html', context)
@@ -30,18 +34,25 @@ def recommend(request, username):
                         list_recommend[user] = 1
                     else:
                         list_recommend[user] += 1 
+    sdict = sorted(list_recommend.items(), key=lambda x: x[1], reverse=True)
+    sdict = dict(sdict)
     context = {
         'person': person,
+        'this_user': person,
         'list_friends': list_friends,
-        'list_recommend': list_recommend,
+        'list_recommend': sdict,
     }
     return render(request, 'friends/recommend.html', context)
 
 
 def location(request, username):
+    person = get_object_or_404(get_user_model(), username=username)
     key_js = 'cf38b368117baa7591dbe1e159585d8c'
+    loca = Location.objects.all()
     context = {
         'key_js': key_js,
+        'this_user': person,
+        'loca': loca,
     }
     return render(request, 'friends/location.html', context)
 
@@ -56,5 +67,6 @@ def save_location(request, username):
     location.save()
     context = {
         'key_js': key_js,
+        'this_user': person,
     }
     return render(request, 'friends/location.html', context)
