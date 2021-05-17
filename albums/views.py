@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
 from .models import Photo, Category, Comment
 from .forms import CommentForm
 
@@ -15,9 +16,26 @@ def index(request):
 
     categories = Category.objects.all()
 
+    page = int(request.GET.get('page', default='1')) # page 매개변수가 없을 경우 1 이 되게, GET방식으로 page 변수를 받음
+    paginator = Paginator(categories, 3, allow_empty_first_page = True) # Paginator(자료목록, 몇개씩출력할지)
+    photo = paginator.get_page(page) # 현재 페이지에 대한 자료를 가져옴
+
+    all_page_list = paginator.page_range # 전체 페이지 리스트 가져오기
+    alpha= beta = 0 # 항상 목록에 5개만 나오게 하기 위한 임시변수
+
+    if page -2 <= 0 : 
+        alpha = 3 - page
+    elif page +2 > len(all_page_list) :
+        beta = 2 + page - len(all_page_list) 
+    page_list = all_page_list[max((page-1)-2-beta, 0)  : min((page-1)+3+alpha, len(all_page_list))] # paginator에서 쓸 페이지 리스트
+
+
+    
+
     context = {
         'categories':categories,
         'photos':photos,
+        'page_list':page_list,
     }
 
     return render(request, 'albums/index.html', context)
@@ -56,6 +74,7 @@ def create(request):
 
 
 def photo(request, pk):
+
     categories = Category.objects.all()
     photo = Photo.objects.get(pk=pk)
     comment_form = CommentForm()
@@ -70,10 +89,13 @@ def photo(request, pk):
 
 
 def delete(request, pk):
+    photo = Photo.objects.get(pk=pk)
+    
     if request.method == 'POST':
-        photo = get_object_or_404(Photo, pk=pk)
         photo.delete()
         return redirect('albums:index')
+    else:
+        return redirect('albums:photo', photo.pk)
 
 
 

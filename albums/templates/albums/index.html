@@ -1,28 +1,41 @@
+<link rel="stylesheet" href="../../static/albums.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;500&display=swap" rel="stylesheet">
 {% extends 'base.html' %}
 
-
 {% block profile_base %}
+
 <!--카테고리 넣기-->
+
 <div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <p>사진첩</p>
+  <div class="">
+    <div class="album-list album-list-font">
+      <p style="font-weight:bolder;">PHOTO ALBUM</p>
+    </div>
+    <div>
+    
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <a href="{% url 'albums:index' %}">All</a>
+        <a class="remove-a" style="font-weight:bold;" href="{% url 'albums:index' %}">All</a>
       </li>
       {% comment %} for 이용해서 카테고리 보여주기 {% endcomment %}
       {% for category in categories  %}
       <li class="list-group-item">
-        <a href="{% url 'albums:index' %}?category={{ category.name }}">
+        <a class="remove-a" href="{% url 'albums:index' %}?category={{ category.name }}">
           {{ category.name }}
         </a>
-      </li> 
+      </li>
+
       {% endfor %}
 
-      <a href="{% url 'albums:create' %}">사진 등록</a>
-      <a href="">사진첩 관리</a>
+      <div class="">
+      <br>
+        <a class="remove-a-manage" href="{% url 'albums:create' %}">사진 등록</a>
+      <br>
+        <a class="remove-a-manage" href="">사진첩 관리</a>
+      </div>
+
 
     </ul>
   </div>
@@ -34,25 +47,69 @@
 {% block content %}
 <!--사진 보여주기-->
 
+{% if user.is_authenticated %}
 
 
-  {% for photo in photos %}
-      <div class="col-md-4">
-        <div class="card my-2">
-          <img src="{{ photo.image.url }}" alt="사진">
+  <div class="d-flex scroll-photo index-div flex-wrap">
+    {% for photo in photos %}
+        <div class="col-md-4">
+          <div class="card my-2">
+            <img src="{{ photo.image.url }}" alt="사진">
 
-          <div class="card-body">
-            <small>앨범 : {{ photo.category.name }} </small>
+            <div class="card-body">
+              <small>앨범 : {{ photo.category.name }} </small>
+            </div>
+            <a href="{% url 'albums:photo' photo.pk %}" class="m-1">보러가기</a>
           </div>
-          <a href="{% url 'albums:photo' photo.pk %}" class="m-1">보러가기</a>
         </div>
-      </div>
-    
-  {% empty %}
-    <h3>추억을 등록해주세요</h3>
-    <a href="{% url 'albums:create' %}">사진 등록하기</a>
+      
+    {% empty %}
+    <div class="album_center center-photo">
+      <img class="default_img" src="../static/photo_default.jpg" alt="기본이미지">
+      <h4 class="default_notice">* 추억을 등록해주세요 *</h4>
+      <a class="default_a_link" href="{% url 'albums:create' %}">사진 등록하기</a>
+    </div>
+    {% endfor %}
 
-  {% endfor %}
+    {% if photo >= 0 %} 
+      <div aria-label="Page navigation example" class="page-position">
+      <ul class="pagination">
+      {% if photo.has_previous %} <!-- Previous 버튼 관련 -->
+        <li class="page-item"><a class="page-link" href="{% url 'albums:index' %}?page={{ photo.previous_page_number }}">Previous</a></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="{% url 'albums:index' %}?page=1">Previous</a></li>
+      {% endif %}
+      
+      {% for p in page_list %} <!-- 페이지 목록 출력 관련 -->
+        {% if p == photos.number %} <!-- 현재 페이지 파란색으로 표시 -->
+          <li class="page-item active"><a class="page-link" href="{% url 'albums:index' %}?page={{ p }}">{{ p }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="{% url 'albums:index' %}?page={{ p }}">{{ p }}</a></li>
+        {% endif %}
+      {% endfor %}
+      
+
+      {% if reviews.has_next %} <!-- Next 버튼 관련-->
+        <li class="page-item"><a class="page-link" href="{% url 'albums:index' %}?page={{ photos.next_page_number }}">Next</a></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="{% url 'albums:index' %}?page={{ photos.number }}">Next</a></li>
+      {% endif %}
+  {% endif %}
+
+  
+{% else %}
+   <div class="album_center center-photo">
+      <img class="default_img" src="../static/login.png" alt="기본이미지">
+
+      <div class="default_login_a">
+      <a href="{% url 'accounts:login' %}">로그인 </a>
+      <span style="color :rgb(27, 30, 207);">  /  </span>
+      <a href="{% url 'accounts:signup' %}"> 회원가입</a>
+      </div>
+    </div>
+{% endif %}
+
+
 
 {% endblock %}
 

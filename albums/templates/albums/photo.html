@@ -1,28 +1,41 @@
+<link rel="stylesheet" href="../../static/albums.css">
 {% extends 'base.html' %}
 
 
 {% block profile_base %}
 <!--카테고리 넣기-->
+
 <div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <p>사진첩</p>
+  <div class="">
+    <div class="album-list album-list-font">
+      <p style="font-weight:bolder;">PHOTO ALBUM</p>
+    </div>
+    <div>
+    
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <a href="{% url 'albums:index' %}">All</a>
+        <a class="remove-a" style="font-weight:bold;" href="{% url 'albums:index' %}">All</a>
       </li>
       {% comment %} for 이용해서 카테고리 보여주기 {% endcomment %}
       {% for category in categories  %}
       <li class="list-group-item">
-        <a href="{% url 'albums:index' %}?category={{ category.name }}">
+        <a class="remove-a" href="{% url 'albums:index' %}?category={{ category.name }}">
           {{ category.name }}
         </a>
-      </li> 
+      </li>
+
       {% endfor %}
 
-      <a href="{% url 'albums:create' %}">사진 등록</a>
-      <a href="">사진첩 관리</a>
+    {% if request.user == photo.user %}
+      <div>
+      <br>
+        <a class="remove-a-manage" href="{% url 'albums:create' %}">사진 등록</a>
+      <br>
+        <a class="remove-a-manage" href="">사진첩 관리</a>
+      </div>
+    {% endif %}
+
 
     </ul>
   </div>
@@ -33,13 +46,15 @@
 
 {% block content %}
 <!--사진 보여주기-->
-<div class="justify-content-center">
 
-  <p>{{ photo.title }}</p>
-  <img style="max-width: 100%; max-height: 100%;" src="{{ photo.image.url }}">
+<div class="d-flex scroll-photo index-div flex-wrap">
+
+  <div>
+  <h2>{{ photo.title }}</h2>
+  <br>
+  <img style="max-width: 100%; max-height: 100%; margin-bottom:5%;" src="{{ photo.image.url }}">
+  </div>
   <p>{{ photo.content }}</p>
-
-</div>
 
 
  <form action="{% url 'albums:comments_create' photo.pk %}" method="POST">
@@ -60,7 +75,7 @@
                 <br>
 
 <a href="" class="btn btn-success">EDIT</a>
-<form action="" method="POST">
+<form action="{% url 'albums:delete' photo.pk %}" method="POST">
   {% csrf_token %}
   <button>DELETE</button>
 </form>

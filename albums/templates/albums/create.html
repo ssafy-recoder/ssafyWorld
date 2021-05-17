@@ -1,29 +1,39 @@
+<link rel="stylesheet" href="../../static/albums.css">
 {% extends 'base.html' %}
-
 
 {% block profile_base %}
 <!--카테고리 넣기-->
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <p>사진첩</p>
+    <div class="album-list album-list-font">
+ 
+      <p style="font-weight:bolder;">PHOTO ALBUM</p>
+  
     </div>
-    <ul class="list-group list-group-flush">
+    <div>
+    
+    </div>
+    <ul class="list-group list-group-flush folder-img">
       <li class="list-group-item">
-        <a href="{% url 'albums:index' %}">All</a>
+        <a class="remove-a" style="font-weight:bold;" href="{% url 'albums:index' %}">All</a>
       </li>
       {% comment %} for 이용해서 카테고리 보여주기 {% endcomment %}
       {% for category in categories  %}
       <li class="list-group-item">
-        <a href="{% url 'albums:index' %}?category={{ category.name }}">
+        <a class="remove-a" href="{% url 'albums:index' %}?category={{ category.name }}">
           {{ category.name }}
         </a>
-      </li> 
+      </li>
+
       {% endfor %}
 
-      <a href="">사진 등록</a>
-      <a href="">사진첩 관리</a>
+      <div class="">
+      <br>
+        <a class="remove-a-manage" href="{% url 'albums:create' %}">사진 등록</a>
+      <br>
+        <a class="remove-a-manage" href="">사진첩 관리</a>
+      </div>
+
 
     </ul>
   </div>
@@ -35,21 +45,15 @@
 {% block content %}
 <!--사진 등록하기-->
 
-  <div class="container">
-
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-
-                <a href="{% url 'albums:index' %}" class="btn btn-dark my-3">BACK</a>
-
-                
-                <div class="card">
+<div class="container">
+  <div class="row justify-content-center">
+     <div class="col-md-10">
+       <a href="{% url 'albums:index' %}" class="back">뒤로가기</a>
+          <div class="card create-card-size">
 
 
-                    <form method='POST' action="" enctype="multipart/form-data">
-                        {% csrf_token %}
-
-                     
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}                   
                         <div class="form-group m-3">
                             <label>앨범 선택</label>
                             <select name="category" class="form-control">
@@ -60,8 +64,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-
-
+                        
                         <div class="form-group m-3">
                             <label>앨범 추가하기</label>
                             <input name="category_new" type="text" placeholder="Create a new category"
@@ -95,7 +98,6 @@
     </div>
 
 {% endblock %}
-
 
 
 {% block category %}
