@@ -14,8 +14,9 @@ def index(request, pk):
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    if page_obj.number > 1:
-        pages_count = list(range(page_obj.number-1,  page_obj.number+2))
+    # page_obj.paginator.num_pages
+    if page_obj.number > 2:
+        pages_count = list(range(page_obj.number-2,  page_obj.number+2))
     else:
         pages_count = list(range(page_obj.number,  page_obj.number+2))
     
@@ -41,6 +42,7 @@ def index(request, pk):
 
 # 작성된 방명록 수정
 def update(request, pk, article_pk):
+    person = User.objects.get(pk=pk)
     article = Guest.objects.get(pk=article_pk)
     if request.method == 'POST':
         form = guestForm(request.POST, instance=article)
@@ -53,6 +55,7 @@ def update(request, pk, article_pk):
         'form': form,
         'pk': pk,
         'article_pk': article_pk,
+        'person': person
     }
     return render(request, 'guest/update.html', context)
 
