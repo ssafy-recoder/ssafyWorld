@@ -1,0 +1,114 @@
+.album-list {
+  padding-top : 10px;
+}
+
+.album-list-font {
+  font-size : 18px;
+  font-weight:bold;
+  color:rgba(34, 151, 230, 0.582)
+}
+
+.album-list-size{
+  height: 100%;
+}
+
+.remove-a{
+  text-decoration: none;
+  color:rgb(83, 82, 82);
+}
+
+.remove-a-manage{
+  text-decoration : none;
+  font-size : small;
+  margin-top: 150px;
+  padding-right: 10px;
+  color:rgb(117, 116, 116)
+}
+
+
+.create-card-size{
+  width:100%;
+}
+
+.back {
+  font-size: small;
+  text-align: right;
+  text-decoration: none;
+  color:rgb(117, 116, 116);
+}
+
+
+.folder-img {
+  list-style-image: url("../static/folder.jpeg");
+}
+
+.scroll-photo {
+  overflow: auto;
+}
+
+.index-div{
+  width : 580px;
+  height: 500px;
+}
+
+
+.page-position{
+  margin-top: 80%;
+}
+
+
+.center-photo{
+  border : 0.3px solid rgb(204, 199, 199);
+  border-width : thin;
+  width : 500px;
+  height: 280px;
+  margin-top: 8%;
+  margin-left: 5%;
+
+}
+
+.default_img{
+  width : 180px;
+  height : 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40%;
+  margin-top: 5%;
+}
+
+.default_notice{
+  text-align: center;
+  margin-top: 2%;
+  font-family: 'Gothic A1', sans-serif;
+}
+
+.default_a_link{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align : center;
+  text-decoration: none;
+  font-family: 'Gothic A1', sans-serif;
+  margin-top: 10px;
+  color :rgb(27, 30, 207);
+}
+
+.default_login_a{
+  text-decoration: none;
+  color :rgb(42, 42, 71);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top:5%;
+  font-size: large;
+  font-family: 'Gothic A1', sans-serif;
+  padding-left:20px;
+}
+
+
+.detail-photo{
+  margin-bottom : 10%;
+
+}
