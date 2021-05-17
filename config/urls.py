@@ -27,6 +27,7 @@ urlpatterns = [
     path('homepage/', include('homepage.urls')),
     path('guest/', include('guest.urls')),
     path('albums/', include('albums.urls')),
+    path('friends/', include('friends.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
