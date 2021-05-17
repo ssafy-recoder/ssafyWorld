@@ -90,7 +90,9 @@
   <div class="menu-item" onclick="handleClickMenu(this)">홈</div>
   <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">프로필</div>
   <div class="menu-item menu-selected" style="top: 86px" onclick="handleClickMenu(this)">사진첩</div>
-  <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">추천일촌</div>
+  <a href="{% url 'friends:index' this_user.username %}">
+    <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">추천일촌</div>
+  </a>
   <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>
 
 {% endblock %}
