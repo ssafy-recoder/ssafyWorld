@@ -47,6 +47,9 @@
   </select>
 
 {% endblock %}
+{% block home_title %}
+  {{ host.username }}님의 미니홈피 입니다.
+{% endblock %}
 {% block content %}
 <!--요기다가 큰 네모박스 수정-->
 
@@ -118,28 +121,25 @@
 </div>
 {% endblock %}
 
-{% block category%}
-<!-- 이곳에 자기 app에 맞는 category 넣어주세용. 
-  자기 app을 selected 하기.-->
-
-  <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
+{% block category %}
+  <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&mute=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
   <a href="{% url 'homepage:index' host.pk %}">
-    <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">홈</div>
+    <div class="menu-item" style="top: 48px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">홈</div>
   </a>
-  <div class="menu-item" style="top: 86px" onclick="handleClickMenu(this)">프로필</div>
-  <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">사진첩</div>
+  <div class="menu-item" style="top: 86px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item" style="top: 124px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">사진첩</div>
   <a href="{% url 'guest:index' host.pk %}">
-    <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>
+    <div class="menu-item" style="top: 162px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">방명록</div>
   </a>
   {% if user == host %}
     <a href="{% url 'friends:index' host.username %}">
-    <div class="menu-item menu-selected" style="top: 200px" onclick="handleClickMenu(this)">추천일촌</div>
+    <div class="menu-item menu-selected" style="top: 200px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">추천일촌</div>
     </a>
   {% else %}
   {% endif %}
+{% endblock %} 
 
 
-{% endblock %}
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/popper.js' %}"></script>

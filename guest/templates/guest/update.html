@@ -26,6 +26,9 @@
     <div style="margin-top: 15px;"><select style="width: 100%; font-family: 'Poor Story', cursive;"><option>파도타기</option></select></div>
 {% endblock %}
 
+{% block home_title %}
+  {{ host.username }}님의 미니홈피 입니다.
+{% endblock %}
 
 {% comment %} 방명록 쓰는 칸 {% endcomment %}
 {% block content %}
@@ -38,18 +41,22 @@
 
 
 
+
 {% block category %}
   <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&mute=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
   <a href="{% url 'homepage:index' host.pk %}">
-    <div class="menu-item" style="top: 48px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">홈</div>
+    <div class="menu-item" style="top: 48px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">홈</div>
   </a>
-  <div class="menu-item" style="top: 86px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">프로필</div>
-  <div class="menu-item" style="top: 124px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">사진첩</div>
+  <div class="menu-item" style="top: 86px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item" style="top: 124px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">사진첩</div>
   <a href="{% url 'guest:index' host.pk %}">
-    <div class="menu-item" style="top: 162px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">방명록</div>
+    <div class="menu-item menu-selected" style="top: 162px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">방명록</div>
   </a>
-  <a href="{% url 'friends:index' user.username %}">
-    <div class="menu-item" style="top: 200px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">추천일촌</div>
-  </a>
+  {% if user == host %}
+    <a href="{% url 'friends:index' host.username %}">
+    <div class="menu-item" style="top: 200px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">추천일촌</div>
+    </a>
+  {% else %}
+  {% endif %}
 {% endblock %} 
 
