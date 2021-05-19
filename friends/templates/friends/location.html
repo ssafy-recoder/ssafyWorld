@@ -5,16 +5,16 @@
   <div style="height: 300px; width:150px;" >
     <div>
     {% if host.profile_img %}
-      <img style="width: 100%" src="{{ host.profile_img.url }}" alt="host_img"></img>
+      <img style="width: 100%; height: 150px;" src="{{ host.profile_img.url }}" alt="host_img"></img>
     {% else %}
-      <img style="width: 100%" src="{% static 'images/기본이미지.png' %}" alt="">
+      <img style="width: 100%; height: 150px;" src="{% static 'images/기본이미지.png' %}" alt="">
     {% endif %}
     </div>
-    <div style="overflow: scroll; overflow-x:hidden;">
+    <div style="overflow: auto; overflow-x:hidden; height: 150px;">
       {% if home_info %}
-        <p style="font-size: 14px" class="mt-2 mb-2">{{ home_info.profile_content }}</p>
+        <p style="font-size: 14px; font-family: 'Poor Story', cursive;" class="mt-2 mb-2">{{ home_info.profile_content }}</p>
       {% else %}        
-        <p style="font-size: 14px" class="mt-2 mb-2">{{ host.username }}님의 미니홈피에 오신 것을 환영합니다.</p>
+        <p style="font-size: 14px; font-family: 'Poor Story', cursive;" class="mt-2 mb-2">{{ host.username }}님의 미니홈피에 오신 것을 환영합니다.</p>
       {% endif %}
     </div>
   </div>
@@ -146,18 +146,18 @@ for (var i = 0; i < positions.length; i ++) {
 {% endblock %}
 
 {% block category %}
-  <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&mute=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
+  <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
   <a href="{% url 'homepage:index' host.pk %}">
-    <div class="menu-item" style="top: 48px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">홈</div>
+    <div class="menu-item" style="top: 48px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">홈</div>
   </a>
-  <div class="menu-item" style="top: 86px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">프로필</div>
-  <div class="menu-item" style="top: 124px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">사진첩</div>
+  <div class="menu-item" style="top: 86px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">프로필</div>
+  <div class="menu-item" style="top: 124px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">사진첩</div>
   <a href="{% url 'guest:index' host.pk %}">
-    <div class="menu-item" style="top: 162px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">방명록</div>
+    <div class="menu-item" style="top: 162px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">방명록</div>
   </a>
   {% if user == host %}
     <a href="{% url 'friends:index' host.username %}">
-    <div class="menu-item menu-selected" style="top: 200px; style="top: 86px; font-family: 'Poor Story', cursive;"" onclick="handleClickMenu(this)">추천일촌</div>
+    <div class="menu-item menu-selected" style="top: 200px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">추천일촌</div>
     </a>
   {% else %}
   {% endif %}
