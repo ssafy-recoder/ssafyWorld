@@ -13,9 +13,11 @@
 }
 
 {% endblock %}
-
+{% block title %}
+  {{ host.username }}님의 미니홈피
+{% endblock %}
 {% block profile_base %}
-  <div style="height: 300px; width:150px;">
+  <div style="height: 300px; width:150px;" >
     <div>
     {% if host.profile_img %}
       <img style="width: 100%" src="{{ host.profile_img.url }}" alt="host_img"></img>
@@ -23,9 +25,12 @@
       <img style="width: 100%" src="data:image/jpeg;base64,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" alt="">
     {% endif %}
     </div>
-    <div>
-      <p style="font-size: 14px" id="profile_text">개발자가 좋아하는<br>알고리듬은<br>Algorithm<br>ㅎㅎ</p>
-
+    <div style="overflow: scroll; overflow-x:hidden;">
+      {% if home_info %}
+        <p style="font-size: 14px" class="mt-2 mb-2">{{ home_info.profile_content }}</p>
+      {% else %}        
+        <p style="font-size: 14px" class="mt-2 mb-2">{{ host.username }}님의 미니홈피에 오신 것을 환영합니다.</p>
+      {% endif %}
     </div>
   </div>
   <div style="font-size: 10px">
@@ -34,8 +39,29 @@
   </div>
   <hr>
   <b class="color-blue">{{ host }}</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
-  
+
+  <select name="none" onchange="window.open(value,'_blank');">
+      <option>파도타기</option>
+    {% for friend in list_friends %}
+      <option value="{% url "homepage:index" friend.pk %}">
+          {{ friend }}
+      </option>
+    {% endfor %}
+  </select>
 {% endblock %}
+
+{% block home_title %}
+  {% if home_info %}
+    {{ home_info.title }}
+  {% else %}
+    {{ host.username }}님의 미니홈피 입니다.
+  {% endif %}
+{% endblock %}
+
+{% block url %}
+  <a href="{% url 'homepage:index' host.pk %}" style="text-decoration:none;"> http://www.cyworld.com/{{ host.id }} </a>
+{% endblock url %}
+
 {% block content %}
   <div class="homepage-content-box" sytle="overflow:scroll;">
     <div style="display: flex; font-size: 14px;" >
@@ -87,14 +113,17 @@
 {% block category %}
   <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&mute=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
   <a href="{% url 'homepage:index' host.pk %}">
-    <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">홈</div>
+    <div class="menu-item menu-selected" style="top: 48px" onclick="handleClickMenu(this)">홈</div>
   </a>
   <div class="menu-item" style="top: 86px" onclick="handleClickMenu(this)">프로필</div>
   <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">사진첩</div>
-  <a href="{% url 'friends:index' user.username %}">
-    <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">추천일촌</div>
-  </a>
   <a href="{% url 'guest:index' host.pk %}">
-    <div class="menu-item" style="top: 200px" onclick="handleClickMenu(this)">방명록</div>
+    <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>
   </a>
+  {% if user == host %}
+    <a href="{% url 'friends:index' host.username %}">
+    <div class="menu-item" style="top: 200px" onclick="handleClickMenu(this)">추천일촌</div>
+    </a>
+  {% else %}
+  {% endif %}
 {% endblock %} 

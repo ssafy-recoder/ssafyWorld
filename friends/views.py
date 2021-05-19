@@ -13,10 +13,16 @@ def index(request, username):
         if user.followers.filter(pk=host.pk).exists():
             list_friends.append(user)
 
+    users = User.objects.all()
+    list_friends = []
+    for user in users:
+        if user.followers.filter(pk=host.pk).exists():
+            list_friends.append(user)
+
     context = {
         'host': host,
-        'all_users': all_users,
         'list_friends': list_friends,
+        'all_users':all_users,
     }
     
     return render(request, 'friends/index.html', context)
@@ -43,7 +49,6 @@ def recommend(request, username):
     sdict = dict(sdict)
     context = {
         'host': host,
-        'this_user': host,
         'list_friends': list_friends,
         'list_recommend': sdict,
     }
@@ -56,7 +61,7 @@ def location(request, username):
     loca = Location.objects.all()
     context = {
         'key_js': key_js,
-        'this_user': host,
+        'host': host,
         'loca': loca,
     }
     return render(request, 'friends/location.html', context)
@@ -72,6 +77,6 @@ def save_location(request, username):
     location.save()
     context = {
         'key_js': key_js,
-        'this_user': host,
+        'host': host,
     }
     return render(request, 'friends/location.html', context)

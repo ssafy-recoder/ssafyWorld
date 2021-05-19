@@ -16,13 +16,13 @@
   자기 app을 selected 하기.-->
   {% comment %}
   <embed class="menu-item" src="https://www.youtube.com/v/8Ox3fwRuuRA?autoplay=1&version=2&amp;hl=ko_KR&autoplay=1&loop=1&amp;rel=0" type="application/x-shockwave-flash" width="300" height="25" allowscriptaccess="always" allowfullscreen="true" autoplay=1></embed>
-  <a href="{% url 'homepage:index' this_user.pk %}">
+  <a href="{% url 'homepage:index' host.pk %}">
     <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">홈</div>
   </a>
   <div class="menu-item" style="top: 86px" onclick="handleClickMenu(this)">프로필</div>
   <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">사진첩</div>
   <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">추천일촌</div>
-  <a href="{% url 'guest:index' this_user.pk %}">
+  <a href="{% url 'guest:index' host.pk %}">
     <div class="menu-item" style="top: 200px" onclick="handleClickMenu(this)">방명록</div>
   </a>
   {% endcomment %}
