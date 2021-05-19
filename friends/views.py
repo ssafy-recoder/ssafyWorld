@@ -7,6 +7,11 @@ from .models import Location
 def index(request, username):
     host = get_object_or_404(get_user_model(), username=username)
     all_users = User.objects.all()
+    
+    list_friends = []
+    for user in all_users:
+        if user.followers.filter(pk=host.pk).exists():
+            list_friends.append(user)
 
     users = User.objects.all()
     list_friends = []

@@ -1,6 +1,26 @@
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth import get_user_model
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'autofocus': True,
+                'class': 'form-control'
+                }
+            )
+    )
+    password = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'autofocus': True,
+                'class': 'form-control',
+                'type': 'password'
+                }
+            )
+    )
 
 class CustomUserCreationForm(UserCreationForm):
     choice_loc = [('1', '광주'), ('2', '경기'), ('3', '서울')]

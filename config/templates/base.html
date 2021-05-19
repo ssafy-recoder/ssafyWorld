@@ -13,7 +13,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-  <script src="{% static 'base.js' %}"></script>
 	<link href="{% static 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900' %}" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -30,7 +29,10 @@
 					&nbsp;&nbsp;|&nbsp;&nbsp;<span class="small-text">TOTAL</span>&nbsp;7777
 				</div>
 				<div class="content-box" style="padding: 20px">
-				{% block profile_base %}{% endblock %}
+				{% block profile_base %}
+				{% endblock %}
+			
+				
 				</div>
 			</div>
 	  </div>
@@ -53,6 +55,7 @@
 
     {% block category %}
 		{% endblock %}
+		 
 		  </div>
 			</div>
 			</div>
@@ -60,10 +63,8 @@
   </div> 
 
 
-	<script>
-		const musicSrc = document.querySelector('#music')
-		
-	</script>
+	  <script src="{% static 'js/base.js' %}"></script>
+
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	
   </body>

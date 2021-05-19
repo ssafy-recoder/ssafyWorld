@@ -72,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'friends.views.add_variable_to_context',
+                # 'guest.views.add_person_variable_to_context'
             ],
         },
     },
@@ -145,4 +147,3 @@ MEDIA_ROOT = BASE_DIR/'media'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'accounts.User'
-
