@@ -17,12 +17,12 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <a class="remove-a" style="font-weight:bold;" href="{% url 'albums:index' %}">All</a>
+        <a class="remove-a" style="font-weight:bold;" href="{% url 'albums:index' host.pk %}">All</a>
       </li>
       {% comment %} for 이용해서 카테고리 보여주기 {% endcomment %}
       {% for category in categories  %}
       <li class="list-group-item">
-        <a class="remove-a" href="{% url 'albums:index' %}?category={{ category.name }}">
+        <a class="remove-a" href="{% url 'albums:index' host.pk %}?category={{ category.name }}">
           {{ category.name }}
         </a>
       </li>
@@ -31,7 +31,7 @@
 
       <div class="">
       <br>
-        <a class="remove-a-manage" href="{% url 'albums:create' %}">사진 등록</a>
+        <a class="remove-a-manage" href="{% url 'albums:create' host.pk %}">사진 등록</a>
       <br>
         <a class="remove-a-manage" href="">사진첩 관리</a>
       </div>
@@ -67,7 +67,7 @@
     <div class="album_center center-photo">
       <img class="default_img" src="../static/photo_default.jpg" alt="기본이미지">
       <h4 class="default_notice">* 추억을 등록해주세요 *</h4>
-      <a class="default_a_link" href="{% url 'albums:create' %}">사진 등록하기</a>
+      <a class="default_a_link" href="{% url 'albums:create' host.pk %}">사진 등록하기</a>
     </div>
     {% endfor %}
 
@@ -82,17 +82,17 @@
       
       {% for p in page_list %} <!-- 페이지 목록 출력 관련 -->
         {% if p == photos.number %} <!-- 현재 페이지 파란색으로 표시 -->
-          <li class="page-item active"><a class="page-link" href="{% url 'albums:index' %}?page={{ p }}">{{ p }}</a></li>
+          <li class="page-item active"><a class="page-link" href="{% url 'albums:index' host.pk %}?page={{ p }}">{{ p }}</a></li>
         {% else %}
-          <li class="page-item"><a class="page-link" href="{% url 'albums:index' %}?page={{ p }}">{{ p }}</a></li>
+          <li class="page-item"><a class="page-link" href="{% url 'albums:index' host.pk %}?page={{ p }}">{{ p }}</a></li>
         {% endif %}
       {% endfor %}
       
 
       {% if reviews.has_next %} <!-- Next 버튼 관련-->
-        <li class="page-item"><a class="page-link" href="{% url 'albums:index' %}?page={{ photos.next_page_number }}">Next</a></li>
+        <li class="page-item"><a class="page-link" href="{% url 'albums:index' host.pk %}?page={{ photos.next_page_number }}">Next</a></li>
       {% else %}
-        <li class="page-item"><a class="page-link" href="{% url 'albums:index' %}?page={{ photos.number }}">Next</a></li>
+        <li class="page-item"><a class="page-link" href="{% url 'albums:index' host.pk %}?page={{ photos.number }}">Next</a></li>
       {% endif %}
   {% endif %}
 
@@ -119,8 +119,10 @@
 
   <div class="menu-item" onclick="handleClickMenu(this)">홈</div>
   <div class="menu-item" style="top: 48px" onclick="handleClickMenu(this)">프로필</div>
+  <a href="{% url 'albums:index' host.pk %}">
   <div class="menu-item menu-selected" style="top: 86px" onclick="handleClickMenu(this)">사진첩</div>
-  <a href="{% url 'friends:index' this_user.username %}">
+  </a>
+  <a href="{% url 'friends:index' host.username %}">
     <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">추천일촌</div>
   </a>
   <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>

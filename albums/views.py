@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
+from django.contrib.auth import get_user_model
 from .models import Photo, Category, Comment
 from .forms import CommentForm
 
 # Create your views here.
 
-def index(request):
+def index(request, pk):
+    User = get_user_model()
+    host = User.objects.get(pk=pk)
     category = request.GET.get('category')
 
     if category == None:
@@ -29,10 +32,8 @@ def index(request):
         beta = 2 + page - len(all_page_list) 
     page_list = all_page_list[max((page-1)-2-beta, 0)  : min((page-1)+3+alpha, len(all_page_list))] # paginator에서 쓸 페이지 리스트
 
-
-    
-
     context = {
+        'host':host,
         'categories':categories,
         'photos':photos,
         'page_list':page_list,
@@ -41,7 +42,9 @@ def index(request):
     return render(request, 'albums/index.html', context)
 
 
-def create(request):
+def create(request, pk):
+    User = get_user_model()
+    host = User.objects.get(pk=pk)
     categories = Category.objects.all()
 
     if request.method == 'POST':
@@ -68,12 +71,15 @@ def create(request):
         return redirect('albums:photo', photo.pk)
 
     context = {
+        'host':host,
         'categories': categories,
         }
     return render(request, 'albums/create.html', context)
 
 
 def photo(request, pk):
+    User = get_user_model()
+    host = User.objects.get(pk=pk)
 
     categories = Category.objects.all()
     photo = Photo.objects.get(pk=pk)
@@ -116,24 +122,24 @@ def comments_create(request, pk):
     return render(request, 'photos/photo.html', context)
 
 
-def category(request):
-    categories = Category.objects.all()
+# def category(request):
+#     categories = Category.objects.all()
 
-    if request.method == 'POST':
-        data = request.POST
+#     if request.method == 'POST':
+#         data = request.POST
 
-        if data['category'] != 'none':
-            category = Category.objects.get(id=data['category'])
+#         if data['category'] != 'none':
+#             category = Category.objects.get(id=data['category'])
 
-        elif data['category_new'] != '':
-            category, created = Category.objects.get_or_create(
-                name=data['category_new'])
+#         elif data['category_new'] != '':
+#             category, created = Category.objects.get_or_create(
+#                 name=data['category_new'])
 
-        else:
-            category = None
-        return redirect('albums:index')
+#         else:
+#             category = None
+#         return redirect('albums:index')
 
-    context = {
-        'categories': categories,
-        }
-    return render(request, 'albums/category.html', context)
+#     context = {
+#         'categories': categories,
+#         }
+#     return render(request, 'albums/category.html', context)
