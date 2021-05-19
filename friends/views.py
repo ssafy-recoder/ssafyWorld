@@ -4,17 +4,31 @@ from accounts.models import User
 from .models import Location
 
 # Create your views here.
+global_list_friends = []
 def index(request, username):
     person = get_object_or_404(get_user_model(), username=username)
     all_users = User.objects.all()
+    
+    list_friends = []
+    for user in all_users:
+        if user.followers.filter(pk=person.pk).exists():
+            list_friends.append(user)
+    global_list_friends = list_friends[::]
 
     context = {
         'person': person,
         'this_user': person,
-        'all_users':all_users,
+        'all_users': all_users,
+        'list_friends': list_friends,
     }
     
     return render(request, 'friends/index.html', context)
+
+
+def add_variable_to_context(request):
+    return {
+        'global_list_friends': global_list_friends
+    }
 
 
 def recommend(request, username):

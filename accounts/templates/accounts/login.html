@@ -15,7 +15,7 @@
 
   <div class="text-center mt-3">
     <div>
-      <img style="width: 30%" src="{% static 'images/싸피로고.png' %}" alt="싸피로고">
+      <img style="width: 30%; margin-top: 50px;" src="{% static 'images/싸피로고.png' %}" alt="싸피로고">
     </div>
     {% block first %}
     
@@ -24,8 +24,15 @@
   <div class="d-flex justify-content-center">
     <form action="" method="POST">
       {% csrf_token %}
-      {{ form.as_p }}
-      <button class="btn btn-primary">작성</button>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <button type="submit" class="btn btn-primary">작성</button>
     </form>
   </div>
 

@@ -21,7 +21,14 @@
   </div>
   <hr>
   <b class="color-blue">{{ this_user }}</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
-  <div style="margin-top: 15px;"><select style="width: 100%"><option>파도타기</option></select></div>
+  <div style="margin-top: 15px;">
+    <select style="width: 100%">
+        <option>파도타기</option>
+      {% for friend in list_friends %}
+        <option value="">{{ friend }}</option>
+      {% endfor %}
+    </select>
+  </div>
 {% endblock %}
 
 {% block content %}
@@ -108,6 +115,7 @@
   <a href="{% url 'guest:index' this_user.pk %}">
     <div class="menu-item" style="top: 200px" onclick="handleClickMenu(this)">방명록</div>
   </a>
+
 
 {% endblock %}
 

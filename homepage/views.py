@@ -10,7 +10,7 @@ def index(request, pk):
     comment_form = HomeCommentForm()
     comments = host.homecomment_set.all()
     context = {
-        'this_user': host,
+        'host': host,
         'comment_form': comment_form,
         'comments': comments,
     }
