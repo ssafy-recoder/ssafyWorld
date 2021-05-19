@@ -39,7 +39,14 @@
   </div>
   <hr>
   <b class="color-blue">{{ host }}</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
-  <div style="margin-top: 15px;"><select style="width: 100%"><option>파도타기</option></select></div>
+  <select name="none" onchange="window.open(value,'_blank');">
+      <option>파도타기</option>
+    {% for friend in list_friends %}
+      <option value="{% url "homepage:index" friend.pk %}">
+          {{ friend }}
+      </option>
+    {% endfor %}
+  </select>
 {% endblock %}
 
 {% block home_title %}
@@ -109,10 +116,13 @@
   </a>
   <div class="menu-item" style="top: 86px" onclick="handleClickMenu(this)">프로필</div>
   <div class="menu-item" style="top: 124px" onclick="handleClickMenu(this)">사진첩</div>
-  <a href="{% url 'friends:index' host.username %}">
-    <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">추천일촌</div>
-  </a>
   <a href="{% url 'guest:index' host.pk %}">
-    <div class="menu-item" style="top: 200px" onclick="handleClickMenu(this)">방명록</div>
+    <div class="menu-item" style="top: 162px" onclick="handleClickMenu(this)">방명록</div>
   </a>
+  {% if user == host %}
+    <a href="{% url 'friends:index' host.username %}">
+    <div class="menu-item" style="top: 200px" onclick="handleClickMenu(this)">추천일촌</div>
+    </a>
+  {% else %}
+  {% endif %}
 {% endblock %} 
