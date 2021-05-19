@@ -1,18 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from accounts.models import User
 from .forms import HomeCommentForm
-from .models import HomeComment
+from .models import HomeComment, Homepage
 from django.contrib.auth import get_user_model
 
 # Create your views here.
 def index(request, pk):
+    User = get_user_model()
     host = User.objects.get(pk=pk)
     comment_form = HomeCommentForm()
     comments = host.homecomment_set.all()
+    home_info = host.homepage_set.all()
     context = {
-        'this_user': host,
+        'host': host,
         'comment_form': comment_form,
         'comments': comments,
+        'home_info': home_info,
     }
     return render(request, 'homepage/index.html', context)
 
