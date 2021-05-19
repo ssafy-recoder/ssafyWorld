@@ -34,7 +34,7 @@
       {% endif %}
     </div>
   </div>
-  
+
   <div style="font-size: 10px">
     <i style="color: #068cb9" class="fa fa-caret-right"></i><b>&nbsp;HISTORY</b>
     <span style="float: right; font-size: 14px; color: #999999"><i class="fa fa-caret-up"></i>&nbsp;<i class="fa fa-caret-down"></i></span>
@@ -42,14 +42,16 @@
   <hr>
   <b class="color-blue">{{ host }}</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
 
-  <select name="none" onchange="window.open(value,'_blank');">
-      <option>파도타기</option>
-    {% for friend in list_friends %}
-      <option value="{% url "homepage:index" friend.pk %}">
-          {{ friend }}
-      </option>
-    {% endfor %}
-  </select>
+  <div>
+    <select name="none" onchange="window.open(value,'_blank');">
+        <option>파도타기</option>
+      {% for friend in list_friends %}
+        <option value="{% url "homepage:index" friend.pk %}">
+            {{ friend }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
 {% endblock %}
 
 {% block home_title %}
