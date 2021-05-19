@@ -10,11 +10,17 @@ def index(request, pk):
     comment_form = HomeCommentForm()
     comments = host.homecomment_set.all()
     home_info = host.homepage_set.all()
+    users = User.objects.all()
+    list_friends = []
+    for user in users:
+        if user.followers.filter(pk=host.pk).exists():
+            list_friends.append(user)
     context = {
         'host': host,
         'comment_form': comment_form,
         'comments': comments,
         'home_info': home_info,
+        'list_friends': list_friends,
     }
     return render(request, 'homepage/index.html', context)
 
