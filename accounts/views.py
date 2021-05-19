@@ -4,6 +4,7 @@ from django.contrib.auth import logout as auth_logout
 from django.views.decorators.http import require_http_methods, require_POST
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
+from .forms import CustomAuthenticationForm
 
 # Create your views here.
 def index(request):
@@ -29,13 +30,13 @@ def signup(request):
 
 def login(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
+        form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
             user = form.get_user()
             auth_login(request, form.get_user(), backend='django.contrib.auth.backends.ModelBackend')
             return redirect('homepage:index', user.pk)
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
     context = {
         'form': form,
     }
