@@ -142,10 +142,10 @@
   </a>
   <div class="menu-item" style="top: 86px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">프로필</div>
   <div class="menu-item" style="top: 124px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">사진첩</div>
-  <a href="{% url 'friends:index' user.username %}">
-    <div class="menu-item" style="top: 162px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">추천일촌</div>
-  </a>
   <a href="{% url 'guest:index' host.pk %}">
     <div class="menu-item" style="top: 200px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">방명록</div>
+  </a>
+  <a href="{% url 'friends:index' user.username %}">
+    <div class="menu-item" style="top: 162px; font-family: 'Poor Story', cursive;" onclick="handleClickMenu(this)">추천일촌</div>
   </a>
 {% endblock %} 
